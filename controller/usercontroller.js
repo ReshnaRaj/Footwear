@@ -13,7 +13,7 @@ const Razorpay = require('razorpay')
 ObjectId = require('mongodb').ObjectID;
 
 const crypto = require('crypto')
-require("dotenv").config();
+
 var instance = new Razorpay({ key_id: process.env.KEY_ID, key_secret: process.env.KEY_SECRET })
 const ITEMS_PAGE = 6
 

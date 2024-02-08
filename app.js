@@ -2,12 +2,15 @@ const express=require('express');
 const app=express();
 const cookieParser=require('cookie-parser');
 const path=require('path');
-const mongoose=require('./configurations/connection');
+const dbConnection=require('./configurations/connection');
 const session=require('express-session');
 const layouts=require('express-ejs-layouts')
 const logger=require('morgan')
 const multer=require('multer')
 const chart=require('chart.js')
+require("dotenv").config();
+dbConnection();
+ 
 
 
 
