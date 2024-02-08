@@ -39,6 +39,30 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+	<style>
+        /* Add any additional styles here */
+        #user-icon {
+            display:right ;
+			float: left; /* Initially hide the user icon */
+        }
+    </style>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var userIcon = document.getElementById("user-icon");
+
+		userIcon.addEventListener("mouseover", function () {
+			// Show the user icon
+			userIcon.style.display = "block";
+
+			// Set a timeout to hide the user icon after 2 minutes (120,000 milliseconds)
+			setTimeout(function () {
+				userIcon.style.display = "none";
+			}, 120000); // 2 minutes in milliseconds
+		});
+	});
+</script>
+
 
 
 </head>
@@ -58,87 +82,41 @@
 											style="color: cadetblue">ON</span></h2>
 								</a></div>
 						</div>
-						<!-- <div class="col-sm-5 col-md-3">
-							<form class="search-wrap">
-								<div class="form-group">
-									<input type="search" class="form-control search" placeholder="Search">
-									<button class="btn btn-primary submit-search text-center" type="submit"><i
-											class="icon-search"></i></button>
-								</div>
-							</form>
-						</div> -->
+
 					</div>
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
 								<li><a href="/">Home</a></li>
-								<!-- <li class="has-dropdown">
-									<a href="">Men</a>
-									<ul class="dropdown">
-										<li><a href="product-detail.html">product-detail</a></li>
-										<li><a href="cart.html">cart</a></li>
-										<li><a href="checkout.html">checkout</a></li>
-										<li><a href="order-complete.html">Order Complete</a></li>
-										<li><a href="add-to-wishlist.html">Wishlist</a></li>
-									</ul>
-								</li> -->
+
 								<li><a href="/shop?page=1">Shop</a></li>
 								<li class="has-dropdown">
-									<!-- <a href="">Women</a> -->
-									<!-- <ul class="dropdown">
-									<li><a href="">product-detail</a></li>
-									<li><a href="">cart</a></li>
-									<li><a href="">checkout</a></li>
-									<li><a href="">Order Complete</a></li>
-									<li><a href="">Wishlist</a></li>
-								</ul> -->
+
 								</li>
 
 								<li><a href="/about">About</a></li>
 								<li><a href="/contact">Contact</a></li>
-								<!-- <li><a href="">WishList<i class="fa-regular fa-heart"></i></a></li> -->
 
 
-								<!-- <svg xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 448 512">
-									<path
-										d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-								</svg> -->
-
-								<li class="has-dropdown" style="float: right;">
-
-									<i class="fa-solid fa-user"></i>
-
-
-									<ul class="dropdown">
+								<li class="nav-item dropdown" style="float: right;">
+									<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i id="user-icon" class="fa-solid fa-user"></i>
+									</a>
+									<div class="dropdown-menu" aria-labelledby="userDropdown">
 										<%if(user){%>
-
-											<li><a href="/userdetails">
-													<%= user.userName %>
-												</a></li>
-											<li><a href="/wishList">WishList</a></li>
-											<li><a href="/logout">Logout</a></li>
-											<% } else{ %>
-												<li><a href="/login">Login</a></li>
-												<% }%>
-
-
-
-									</ul>
+										<a class="dropdown-item" href="/userdetails"><%= user.userName %></a>
+										<a class="dropdown-item" href="/wishList">WishList</a>
+										<a class="dropdown-item" href="/logout">Logout</a>
+										<% } else{ %>
+										<a class="dropdown-item" href="/login">Login</a>
+										<% }%>
+									</div>
 								</li>
-
-
-
-
-
-
+		
 
 								<li class="cart"><a href="/cart"><i class="bi bi-cart"></i></a>
 								</li>
-
-
-
-
 
 							</ul>
 						</div>
@@ -146,4 +124,3 @@
 				</div>
 			</div>
 		</nav>
-	

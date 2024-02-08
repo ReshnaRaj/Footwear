@@ -17,14 +17,8 @@ const CartSchema=new mongoose.Schema({
           },
           price:{
             type:Number
-          }
-          
-        }
-        
+          } 
+        } 
       ],
-    // totalprice:{
-    //   type:Number
-    //  }
-   
 })
 module.exports = mongoose.model("Cart",CartSchema);

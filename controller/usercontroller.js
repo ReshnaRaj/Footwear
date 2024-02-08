@@ -39,6 +39,7 @@ module.exports = {
 
   userhome: async (req, res) => {
     let user = null
+    console.log(req.session.user,"user session.....")
     if (req.session.user) {
       user = req.session.user
       console.log(user + 'userhome page startedd');
@@ -73,6 +74,7 @@ module.exports = {
   },
   doLogin: async (req, res) => {
     try {
+      console.log(req.body,"requesting....")
       const { email, password } = req.body;
       console.log(email + 'Checking email is coming or not');
       const user = await UserModel.findOne({ email: email });
@@ -122,8 +124,9 @@ module.exports = {
   //   res.render('user/otpvalid')
 
   // },
-  otp: async (req, res) => {
+  otp: async (req, res,next) => {
     try {
+      console.log(req.body,"otp pages starting")
       // userName = req.body.userName
       // email = req.body.email;
       // Phone = req.body.phone
@@ -140,7 +143,7 @@ module.exports = {
         var mailOptions = {
           from: process.env.user,
           to: req.body.email,
-          subject: "Otp for registration is: ",
+          subject: "OTP from VaneelaMoon: ",
           html: "<h3>OTP for account verification is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
         };
 
@@ -223,22 +226,7 @@ module.exports = {
 
 
 
-  // doSignup: async (req, res) => {
-
-  //   req.body.password = await bcrypt.hash(req.body.password, 10)
-  //   console.log(req.body);
-  //   let user = UserModel({
-  //     userName: req.body.userName,
-  //     email: req.body.email,
-  //     Phone: req.body.Phone,
-  //     password: req.body.password
-
-  //   })
-  //   user.save().then((doc) => {
-  //     req.session.user=doc
-  //     res.redirect('/')
-  //   })
-  // },
+  
 
   logoutUser: (req, res) => {
     try {
@@ -255,7 +243,6 @@ module.exports = {
 
       const user = await UserModel.findOne({ _id: uzer._id })
       // console.log(uzer);
-
       res.render('user/userdetail', { pages: 'user', user })
     } catch (error) {
 
@@ -374,19 +361,19 @@ module.exports = {
   shop: async (req, res) => {
     user = req.session.user
     const page = req.query.page
-    console.log(user);
-    console.log("kkkk");
+    console.log(user,"pppppp");
+    console.log(page,"kkkk");
     let cat = await categoryModel.find({status:'Listed'})
     const sizes = await productModel.distinct('size')
 
     if (req.query.ctdc) {
-      console.log(req.query.ctdc, "eeeeeeeeeeeee");
+      console.log(req.query.ctdc, "category id");
       let pdtss = await productModel.find({ category: req.query.ctdc , status:'Listed'})
       res.render('user/shop', { user, cat, pdtss, page, sizes })
     }
     else if(req.query.sort){
       try {
-        console.log("sorting working...");
+        console.log(req.query.sort,"sorting working...");
         if(req.query.sort=='price'){
           let pdtss=await productModel.find({status:'Listed'}).sort({price:1}).collation({ locale: "en", numericOrdering: true }).limit(ITEMS_PAGE)
           res.render('user/shop',{user,cat,pdtss,page,sizes})
@@ -444,14 +431,17 @@ module.exports = {
       console.log('check');
       let userId = req.session.user._id
       let proId = req.body.id
-      console.log((proId + "product id"));
+      // console.log((proId + "product id"));
       let cart = await CartModel.findOne({ userr: userId })
+      console.log(cart,"cart is getting....")
       let product2 = await productModel.findOne({ _id: proId })
+      console.log(product2,"product id")
       let produObj = {
         id: proId,
         quantity: 1,
         price: product2.price
       }
+      console.log(produObj,"object of product...")
       if (cart) {
         console.log("update cart");
         let indexvalue = cart.productt.findIndex((p) => p.id == proId)//checking the product is avaialabke in the database or not and taking the index value of the product inside the indexvalue

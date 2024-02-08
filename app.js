@@ -1,4 +1,5 @@
 const express=require('express');
+const app=express();
 const cookieParser=require('cookie-parser');
 const path=require('path');
 const mongoose=require('./configurations/connection');
@@ -15,7 +16,7 @@ const chart=require('chart.js')
 
 const homeRoute=require('./routes/User');
 const adminRoute=require('./routes/Admin');
-const app=express();
+
 const createError = require('http-errors')
 app.use(layouts);
 app.set('views',path.join(__dirname,'views'))
