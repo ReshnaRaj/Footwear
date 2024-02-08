@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 // const db=require('../errorHandling/dberrors')
 
-mongoose.connect('mongodb://127.0.0.1:27017/footwear',()=>{
+mongoose.connect(process.env.DATABASE_URL,()=>{
     // db.on('error', (error) => console.error(error))
     console.log('mongoose connected')
 });
