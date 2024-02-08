@@ -1,5 +1,4 @@
 const mongoose=require('mongoose')
- 
 const dbConnection=async()=>{
     mongoose.set('strictQuery',false)
     try{
@@ -8,6 +7,7 @@ const dbConnection=async()=>{
             useUnifiedTopology: true,
           })
           .then(() => {
+            console.log(process.env.DATABASE_URL)
             console.log("Database connected successfully");
           })
           .catch((err) => {
