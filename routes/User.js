@@ -16,7 +16,7 @@ router.get('/shop',controller.shop)
 
 
 
-router.post("/dologin", controller.doLogin);
+router.post("/dologin",controller.doLogin);
 // router.get('/',controller.userhome)
 router.post('/otp',controller.otp)
 router.post('/resendotp',controller.resendotp)
