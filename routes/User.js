@@ -20,6 +20,7 @@ router.post("/dologin",controller.doLogin);
 // router.get('/',controller.userhome)
 router.post('/otp',controller.otp)
 router.post('/resendotp',controller.resendotp)
+ 
 router.post('/verifyotp',controller.verifyotp)
 router.get('/userdetails',userSession,controller.userdetails)
 router.post('/addaddress',userSession,controller.addaddress)
